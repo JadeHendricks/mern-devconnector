@@ -13,6 +13,9 @@ const post = require('./routes/api/post');
 //Connect to DB
 connectDB();
 
+//Init Middleware
+app.use(express.json({ extended: false }));
+
 //Routes
 app.use('/api/auth', auth);
 app.use('/api/users', users);
