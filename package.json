@@ -1,0 +1,31 @@
+{
+  "name": "mern-starterkit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sever.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "start:client": "npm start --prefix client",
+    "clientinstall": "npm install --prefix client",
+    "start:dev": "concurrently \"npm run start\" \" npm run start:client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JadeHendricks/mern-starterkit.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JadeHendricks/mern-starterkit/issues"
+  },
+  "homepage": "https://github.com/JadeHendricks/mern-starterkit#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.18"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
+  }
+}
