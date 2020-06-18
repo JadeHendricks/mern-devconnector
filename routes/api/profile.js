@@ -21,7 +21,7 @@ router.get('/me', auth, async (req, res) => {
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.send('Server Error')
+    res.status(500).send('Server Error')
   }
 
 });
@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
     res.json(profiles);
   } catch (err) {
     console.error(err.message);
-    res.send('Server Error')
+    res.status(500).send('Server Error')
   }
 
 });
@@ -56,7 +56,7 @@ router.get('/user/:id', async (req, res) => {
     if (err.kind === 'ObjectId') {
       return res.status(400).json({ msg: 'Profile not found' })
     }
-    res.send('Server Error');
+    res.status(500).send('Server Error');
   }
 });
 
@@ -72,7 +72,7 @@ router.delete('/', auth, async (req, res) => {
     res.json({ msg: 'User deleted' })
   } catch (err) {
     console.error(err.message);
-    res.send('Server Error')
+    res.status(500).send('Server Error')
   }
 });
 
@@ -125,7 +125,7 @@ router.post('/', [auth, [
     res.json(profile);
   } catch (err) {
     console.error(err.message);
-    res.send('Server Error')
+    res.status(500).send('Server Error')
   }
 });
 
@@ -268,9 +268,8 @@ router.delete('/education/:id', auth, async (req, res) => {
 router.get('/github/:username', async (req, res) => {
   try {
     const options = {
-      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc&
-            client_id=${process.env.GITHUB_CLIENTID}
-            &client_secret=${process.env.GITHUB_SECRET}`,
+      uri: `https://api.github.com/users/${req.params.username}/repos?per_page=5&sort=created:asc
+            &client_id=${process.env.GITHUB_CLIENTID}&client_secret=${process.env.GITHUB_SECRET}`,
       method: 'GET',
       headers: { 'user-agent': 'node.js' }
     };
