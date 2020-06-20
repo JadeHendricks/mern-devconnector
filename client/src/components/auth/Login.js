@@ -1,7 +1,10 @@
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { login } from '../../actions/auth';
 
-const Login = () => {
+const Login = ({ login, isAuthenticated }) => {
 
   const [formData, setFormData] = useState({
     email: '',
@@ -13,7 +16,12 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    login(email, password);
+  }
+
+  //Re-direct if logged in
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
   }
 
   return (
@@ -25,7 +33,7 @@ const Login = () => {
           <input type="email" placeholder="Email Address" value={ email } name="email" onChange={ onChange } />
         </div>
         <div className="form-group">
-          <input type="password" placeholder="Password" value={ password } name="password" minLength="6" onChange={ onChange } />
+          <input type="password" placeholder="Password" value={ password } name="password" onChange={ onChange } />
         </div>
         <input type="submit" className="btn btn-primary" value="Login" />
       </form>
@@ -34,4 +42,14 @@ const Login = () => {
   )
 }
 
-export default Login;
+Login.propTypes = {
+  login: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+}
+
+//get access to state inside of the reducer
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps, { login })(Login);
