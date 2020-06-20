@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setAlert } from '../../actions/alert';
+import { register } from '../../actions/auth';
 
-const Register = ({ setAlert }) => {
+const Register = ({ setAlert, register }) => {
 
   const [formData, setFormData] = useState({
     name: '',
@@ -21,7 +22,7 @@ const Register = ({ setAlert }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      console.log(formData);
+      register({ name, email, password });
     }
   }
 
@@ -31,17 +32,17 @@ const Register = ({ setAlert }) => {
       <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
       <form className="form" onSubmit={ onSubmit }>
         <div className="form-group">
-          <input type="text" placeholder="Name" value={ name } name="name" required onChange={ onChange }/>
+          <input type="text" placeholder="Name" value={ name } name="name" onChange={ onChange }/>
         </div>
         <div className="form-group">
           <input type="email" placeholder="Email Address" value={ email } name="email" onChange={ onChange }/>
           <small className="form-text">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
         </div>
         <div className="form-group">
-          <input type="password" placeholder="Password" value={ password } name="password" minLength="6" onChange={ onChange } />
+          <input type="password" placeholder="Password" value={ password } name="password" onChange={ onChange } />
         </div>
         <div className="form-group">
-          <input type="password" placeholder="Confirm Password" value={ password2 } name="password2" minLength="6" onChange={ onChange } />
+          <input type="password" placeholder="Confirm Password" value={ password2 } name="password2" onChange={ onChange } />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />
       </form>
@@ -51,7 +52,8 @@ const Register = ({ setAlert }) => {
 }
 
 Register.propTypes = {
-  setAlert: PropTypes.func.isRequired
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired
 }
 
-export default connect(null, { setAlert })(Register);
+export default connect(null, { setAlert, register })(Register);
