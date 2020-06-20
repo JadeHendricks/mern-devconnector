@@ -1,6 +1,6 @@
 import { 
   REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR,
-  LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from '../actions/types';
+  LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from '../actions/types';
 
 const intialState = {
   token: localStorage.getItem('token'),
@@ -36,6 +36,13 @@ export default function(state = intialState, action) {
         ...state,
         token: null,
         isAuthenticated: false,
+        loading: false
+      }
+    case CLEAR_PROFILE:
+      return {
+        ...state,
+        profile: null,
+        repos: [],
         loading: false
       }
     default: 
