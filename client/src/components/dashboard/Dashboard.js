@@ -9,6 +9,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
 
   useEffect(() => {
     getCurrentProfile();
+    // eslint-disable-next-line
   }, []);
 
 
@@ -24,7 +25,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
     </Fragment> : 
     <Fragment>
       <p>You have not yet set up a profile, please add some info</p>
-      <Link to='/createProfile' className='btn btn-primary my-1'>Create Profile</Link>
+      <Link to='/create-profile' className='btn btn-primary my-1'>Create Profile</Link>
     </Fragment>}
   </Fragment>;
 }
