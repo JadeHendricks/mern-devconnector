@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import ProfileTop from './ProfileTop';
 import ProfileAbout from './ProfileAbout';
+import ProfileGithub from './ProfileGithub';
 import ProfileExperience from './ProfileExperience'
 import ProfileEducation from './ProfileEducation'
 import { getProfileById } from '../../actions/profile';
@@ -46,6 +47,11 @@ const Profile = ({ getProfileById, match, profile: { profile, loading }, auth })
               </Fragment>
             ) : <h4>No education credentials</h4> }
           </div>
+
+          { profile.githubusername && (
+            <ProfileGithub username={ profile.githubusername } />
+          )}
+
         </div>
       </Fragment>}
     </Fragment>
