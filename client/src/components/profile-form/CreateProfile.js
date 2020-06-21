@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { createProfile } from '../../actions/profile';
 import { connect } from 'react-redux';
-import auth from '../../reducers/auth';
 
 const CreateProfile = ({ createProfile, history }) => {
 

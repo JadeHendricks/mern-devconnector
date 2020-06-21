@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import { createProfile, getCurrentProfile } from '../../actions/profile';
 import { connect } from 'react-redux';
-import auth from '../../reducers/auth';
 
 const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentProfile, history }) => {
 
@@ -42,7 +41,7 @@ const EditProfile = ({ profile: { profile, loading }, createProfile, getCurrentP
       instagram: loading || !profile.instagram ? '' : profile.instagram
     }); 
     // eslint-disable-next-line
-  }, [loading]);
+  }, [loading, getCurrentProfile]);
 
   const {
     company, website, location, status, skills, githubusername, 

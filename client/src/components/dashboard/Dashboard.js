@@ -12,8 +12,7 @@ const Dashboard = ({ getCurrentProfile, auth: { user }, profile: { profile, load
 
   useEffect(() => {
     getCurrentProfile();
-    // eslint-disable-next-line
-  }, []);
+  }, [getCurrentProfile]);
 
 
   return loading && profile === null ? <Spinner /> : 
