@@ -1,6 +1,6 @@
 import { 
   REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR,
-  LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE } from '../actions/types';
+  LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT, CLEAR_PROFILE, DELETE_ACCOUNT } from '../actions/types';
 
 const intialState = {
   token: localStorage.getItem('token'),
@@ -28,6 +28,7 @@ export default function(state = intialState, action) {
         loading: false
       }
     case REGISTER_FAIL:
+    case DELETE_ACCOUNT:
     case AUTH_ERROR:
     case LOGIN_FAIL:
     case LOGOUT:

@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const { check, validationResult } = require('express-validator')
 const Profile = require('../../models/Profile');
+const Post = require('../../models/Post');
 const User = require('../../models/User');
 const auth = require('../../middleware/auth');
 
@@ -65,6 +66,8 @@ router.get('/user/:id', async (req, res) => {
 // Private
 router.delete('/', auth, async (req, res) => {
   try {
+    // Remove users posts
+    await Post.deleteMany({ user: req.user.id });
     // Remove Profile, User
     await Profile.findOneAndRemove({ user: req.user.id });
     await User.findOneAndRemove({ _id: req.user.id });
@@ -229,7 +232,6 @@ router.put('/education', [auth, [
 
   try {
     const profile = await Profile.findOne({ user: req.user.id });
-    console.log(profile.educations);
     profile.educations.unshift(newEdu);
 
     await profile.save();
